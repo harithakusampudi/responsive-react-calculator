@@ -11,7 +11,7 @@ const CalculatorLayout = styled.div`
 
 const Title = styled.h2`
   text-align: center;
-  color: #40a9ff;
+  color: #262626;
 `;
 const Wrapper = styled.div`
   display: flex;

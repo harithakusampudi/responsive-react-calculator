@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col, Button } from "antd";
+import { getColorForKey } from "../utils";
+import { jsonForKeyPad } from "../constants";
 interface KeyPadProps {}
+interface RowComponentPorps {
+  keys: string[];
+}
 
-const KeyPadWrapper = styled.div``;
+interface ColumnProps {
+  shape: string;
+  color: string;
+  label: string;
+  span: number;
+}
 
 const Key = styled(Button)`
   width: 100%;
@@ -11,59 +21,57 @@ const Key = styled(Button)`
   border-color: ${props => props?.color || "#000"};
   background: ${props => props?.color || "#000"};
 `;
-const LargeKey = styled(Button)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-item: center;
-  border-color: ${props => props?.color || "#000"};
-  background: ${props => props?.color || "#000"};
-`;
+
 const Label = styled.span`
+  color: ${props => (props.color === "#8c8c8c" ? "#000" : "#fff")};
   font-size: 16px;
 `;
 export const ColWrapper = styled(Col)`
   padding: 8px 0;
 `;
 
-const Column = (props: any) => {
+const Column = (props: ColumnProps) => {
+  const { shape, color, label, span } = props;
   return (
-    <ColWrapper span={6}>
-      <Key shape="circle" type="primary" size="large" color="#595959">
-        <Label>{props.keyLabel}</Label>
+    <ColWrapper span={span}>
+      <Key
+        shape={shape === "circle" ? "circle" : "round"}
+        size="large"
+        color={color}
+      >
+        <Label color={color}>{label}</Label>
       </Key>
     </ColWrapper>
   );
 };
 
-const RowComponent = (props: any) => {
+const RowComponent = (props: RowComponentPorps) => {
   return (
     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      <Column keyLabel="8" />
-      <Column keyLabel="7" />
-      <Column keyLabel="7" />
-      <Column keyLabel="7" />
+      {props.keys.map((eachKey: string) => {
+        let properties = {
+          shape: eachKey === "0" ? "round" : "circle",
+          color: getColorForKey(eachKey),
+          label: eachKey,
+          span: 6
+        };
+
+        if (eachKey === "0") {
+          properties.span = 12;
+        }
+        return <Column {...properties} />;
+      })}
     </Row>
   );
 };
 
 const KeyPad = (props: KeyPadProps) => {
   return (
-    <KeyPadWrapper>
-      <RowComponent />
-      <RowComponent />
-      <RowComponent />
-      <RowComponent />
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <ColWrapper span={12}>
-          <LargeKey shape="round" type="primary" size="large" color="#595959">
-            <Label>0</Label>
-          </LargeKey>
-        </ColWrapper>
-        <Column keyLabel="7" />
-        <Column keyLabel="7" />
-      </Row>
-    </KeyPadWrapper>
+    <div>
+      {Object.values(jsonForKeyPad.basic).map((value: string[]) => {
+        return <RowComponent keys={value} />;
+      })}
+    </div>
   );
 };
 

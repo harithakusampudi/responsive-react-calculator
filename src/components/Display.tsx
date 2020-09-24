@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col, Button } from "antd";
+import { Row } from "antd";
 import { ColWrapper } from "./KeyPad";
 
 const DisplayWrapper = styled.div`
