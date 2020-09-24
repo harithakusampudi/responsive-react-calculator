@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Input } from "antd";
+import { Row, Col, Button } from "antd";
+import { ColWrapper } from "./KeyPad";
 
 const DisplayWrapper = styled.div`
   display: flex;
   flex: 2;
   flex-direction: column;
-  background-color: #262626;
   text-align: right;
-  padding: 0px 0.5rem;
   line-height: 1rem;
   overflow: scroll;
 `;
@@ -30,7 +29,11 @@ const Display = (props: DisplayProps) => {
   const number = 1234;
   return (
     <DisplayWrapper>
-      <InputData type="text" readOnly value={number.toLocaleString()} />
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <ColWrapper span={24}>
+          <InputData type="text" readOnly value={number.toLocaleString()} />
+        </ColWrapper>
+      </Row>
     </DisplayWrapper>
   );
 };

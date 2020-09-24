@@ -6,25 +6,27 @@ const CalculatorLayout = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 `;
 
 const Title = styled.h2`
   text-align: center;
-  padding: 1rem;
   color: #40a9ff;
 `;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 40%;
-  height: 80%;
+  height: 26rem;
+  width: 16rem;
 `;
 const Content = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: 15% 1fr;
+  padding: 1rem;
+  background-color: #141414;
 `;
 
 export default {
