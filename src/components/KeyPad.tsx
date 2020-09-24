@@ -26,7 +26,6 @@ interface KeyValueProps {
   [key: string]: string;
 }
 interface ColumnProps extends KeyPadProps {
-  shape: string;
   color: string;
   label: string;
   value: string;
@@ -34,15 +33,7 @@ interface ColumnProps extends KeyPadProps {
 }
 
 const Column = (props: ColumnProps) => {
-  const {
-    shape,
-    color,
-    label,
-    value,
-    span,
-    onKeyPress,
-    onEvaluateExpression
-  } = props;
+  const { color, label, value, span, onKeyPress, onEvaluateExpression } = props;
   const onClick = () => {
     if (value === "=") {
       onEvaluateExpression && onEvaluateExpression();
@@ -50,13 +41,14 @@ const Column = (props: ColumnProps) => {
       onKeyPress(value);
     }
   };
-  console.log("span", value, span);
 
+  const shape = value === "0" ? "round" : "circle";
   return (
     <ColWrapper span={span}>
       <Key
-        shape={shape === "circle" ? "circle" : "round"}
+        shape={shape}
         size="large"
+        value={value}
         type="text"
         color={color}
         onClick={() => onClick()}
@@ -76,10 +68,8 @@ const RowComponent = (props: RowComponentPorps) => {
       {props.rowKeys.map((eachKey: KeyValueProps) => {
         const keyValue = Object.keys(eachKey)[0];
         const keyLabel = Object.values(eachKey)[0];
-        console.log("keyva", keyValue, keyLabel);
 
         let properties = {
-          shape: keyValue === "0" ? "round" : "circle",
           color:
             type === KEY_PAD_TYPES.BASIC ? getColorForKey(keyValue) : "#595959",
           label: keyLabel,
@@ -90,7 +80,6 @@ const RowComponent = (props: RowComponentPorps) => {
         };
 
         if (keyValue === "0") {
-          console.log("serto", keyValue);
           properties.span = 12;
         }
         return <Column {...properties} />;

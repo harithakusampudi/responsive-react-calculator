@@ -30,12 +30,29 @@ const Content = styled.div`
   padding: 1rem;
   background-color: #141414;
 `;
-
 const Key = styled(Button)`
-  width: ${props => (props?.shape === "circle" ? "60px" : "100px")};
-  height: ${props => (props?.shape === "circle" ? "60px" : "100px")};
+  @media (max-width: 1024px) {
+    width: ${props => (props?.value === "0" ? "130px" : "55px")};
+    min-height: ${props => (props?.value === "0" ? "55px" : "55px")};
+  }
+  width: ${props => (props?.value === "0" ? "140px" : "55px")};
+  min-height: ${props => (props?.value === "0" ? "55px" : "55px")};
   border-color: ${props => props?.color || "#000"};
   background: ${props => props?.color || "#000"};
+  :hover {
+    background: ${props => props?.color || "#000"};
+    border-color: ${props => props?.color || "#000"};
+  }
+  :focus {
+    background: ${props => props?.color || "#000"};
+    border-color: ${props => props?.color || "#000"};
+  }
+  :active {
+    border-color: ${props => props?.color || "#000"};
+    background: ${props => props?.color || "#000"};
+    box-shadow: 0 9px #999;
+    transform: translateY(4px);
+  }
 `;
 
 const Label = styled.span`
