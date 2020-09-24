@@ -3,8 +3,9 @@ import Display from "./Display";
 import KeyPad from "./KeyPad";
 import Styles from "./styles";
 import * as math from "mathjs";
+import { isOperator } from "../utils";
 
-const { CalculatorLayout, Title, Content, Wrapper } = Styles;
+const { CalculatorLayout, Content, Wrapper } = Styles;
 
 interface CalculatorProps {}
 
@@ -27,7 +28,13 @@ const Calculator = (Props: CalculatorProps) => {
       if (inputExpression === "0") {
         setInputExpression(evaluate(inputExpression + key));
       } else {
-        setInputExpression(inputExpression + key);
+        const lastChar = inputExpression.split("").pop();
+        const bothAreOperators = isOperator(lastChar) && isOperator(key);
+        if (bothAreOperators) {
+          setInputExpression(inputExpression.slice(0, -1) + key);
+        } else {
+          setInputExpression(inputExpression + key);
+        }
       }
     }
   };

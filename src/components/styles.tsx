@@ -10,17 +10,13 @@ const CalculatorLayout = styled.div`
   overflow: hidden;
 `;
 
-const Title = styled.h2`
-  text-align: center;
-  color: #262626;
-`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 const Content = styled.div`
-  @media (max-width: 1024px) {
+  @media (max-width: 728px) {
     width: 18rem;
   }
   width: 100%;
@@ -31,7 +27,7 @@ const Content = styled.div`
   background-color: #141414;
 `;
 const Key = styled(Button)`
-  @media (max-width: 1024px) {
+  @media (max-width: 600px) {
     width: ${props => (props?.value === "0" ? "130px" : "55px")};
     min-height: ${props => (props?.value === "0" ? "55px" : "55px")};
   }
@@ -92,7 +88,7 @@ const KeyPadWrapper = styled.div`
 
 const ScientificKeyWrapper = styled.div`
   margin-right: 20px;
-  @media (max-width: 1024px) {
+  @media (max-width: 600px) {
     display: none;
   }
 `;
@@ -100,7 +96,6 @@ const BasicKeyWrapper = styled.div``;
 
 export default {
   CalculatorLayout,
-  Title,
   Content,
   Wrapper,
   Key,
