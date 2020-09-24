@@ -1,12 +1,14 @@
+import { keyColors } from "../constants";
+
 export const isNumber = (key: any) => {
   return !isNaN(key) || key === ".";
 };
 
 export const getColorForKey = (key: string) => {
   if (isNumber(key)) {
-    return "#595959";
+    return keyColors.black;
   } else {
-    const specialKeys = key === "c" || key === "+/-" || key === "%";
-    return specialKeys ? "#8c8c8c" : "#fa8c16";
+    const specialKeys = key === "c" || key === "±" || key === "%";
+    return specialKeys ? keyColors.lightGrey : keyColors.orange;
   }
 };

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button, Col } from "antd";
 
 const CalculatorLayout = styled.div`
   display: flex;
@@ -17,10 +18,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 26rem;
-  width: 16rem;
 `;
 const Content = styled.div`
+  @media (max-width: 1024px) {
+    width: 18rem;
+  }
   width: 100%;
   height: 100%;
   display: grid;
@@ -29,9 +31,67 @@ const Content = styled.div`
   background-color: #141414;
 `;
 
+const Key = styled(Button)`
+  width: ${props => (props?.shape === "circle" ? "60px" : "100px")};
+  height: ${props => (props?.shape === "circle" ? "60px" : "100px")};
+  border-color: ${props => props?.color || "#000"};
+  background: ${props => props?.color || "#000"};
+`;
+
+const Label = styled.span`
+  color: ${props => (props.color === "#8c8c8c" ? "#000" : "#fff")};
+  font-size: 16px;
+  margin-left: ${props => (props.key === "0" ? "0px" : "none")};
+`;
+export const ColWrapper = styled(Col)`
+  padding: 8px 0;
+`;
+
+const DisplayWrapper = styled.div`
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1rem;
+  overflow: hidden;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  color: #f0f0f0;
+  font-family: San Francisco;
+  font-size: 40px;
+  max-width: 100%;
+  background-color: inherit !important;
+  border: none;
+  outline: none;
+  text-align: right !important;
+`;
+
+const KeyPadWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ScientificKeyWrapper = styled.div`
+  margin-right: 20px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+const BasicKeyWrapper = styled.div``;
+
 export default {
   CalculatorLayout,
   Title,
   Content,
-  Wrapper
+  Wrapper,
+  Key,
+  Label,
+  ColWrapper,
+  DisplayWrapper,
+  KeyPadWrapper,
+  ScientificKeyWrapper,
+  BasicKeyWrapper,
+  Input
 };

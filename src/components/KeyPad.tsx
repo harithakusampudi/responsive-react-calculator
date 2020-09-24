@@ -1,62 +1,96 @@
 import React from "react";
-import styled from "styled-components";
-import { Row, Col, Button } from "antd";
+import { Row } from "antd";
 import { getColorForKey } from "../utils";
-import { jsonForKeyPad } from "../constants";
-interface KeyPadProps {}
-interface RowComponentPorps {
-  keys: string[];
+import { jsonForKeyPad, KEY_PAD_TYPES } from "../constants";
+import Styles from "./styles";
+
+const {
+  ColWrapper,
+  KeyPadWrapper,
+  ScientificKeyWrapper,
+  BasicKeyWrapper,
+  Key,
+  Label
+} = Styles;
+interface KeyPadProps {
+  onKeyPress: (label: string) => void;
+  onEvaluateExpression?: () => void;
+}
+interface RowComponentPorps extends KeyPadProps {
+  rowKeys: KeyValueProps[];
+  span: number;
+  type: string;
 }
 
-interface ColumnProps {
+interface KeyValueProps {
+  [key: string]: string;
+}
+interface ColumnProps extends KeyPadProps {
   shape: string;
   color: string;
   label: string;
+  value: string;
   span: number;
 }
 
-const Key = styled(Button)`
-  width: 100%;
-  height: 100%;
-  border-color: ${props => props?.color || "#000"};
-  background: ${props => props?.color || "#000"};
-`;
-
-const Label = styled.span`
-  color: ${props => (props.color === "#8c8c8c" ? "#000" : "#fff")};
-  font-size: 16px;
-`;
-export const ColWrapper = styled(Col)`
-  padding: 8px 0;
-`;
-
 const Column = (props: ColumnProps) => {
-  const { shape, color, label, span } = props;
+  const {
+    shape,
+    color,
+    label,
+    value,
+    span,
+    onKeyPress,
+    onEvaluateExpression
+  } = props;
+  const onClick = () => {
+    if (value === "=") {
+      onEvaluateExpression && onEvaluateExpression();
+    } else {
+      onKeyPress(value);
+    }
+  };
+  console.log("span", value, span);
+
   return (
     <ColWrapper span={span}>
       <Key
         shape={shape === "circle" ? "circle" : "round"}
         size="large"
+        type="text"
         color={color}
+        onClick={() => onClick()}
       >
-        <Label color={color}>{label}</Label>
+        <Label color={color} key={value}>
+          {label}
+        </Label>
       </Key>
     </ColWrapper>
   );
 };
 
 const RowComponent = (props: RowComponentPorps) => {
+  const { type, span, onKeyPress, onEvaluateExpression } = props;
   return (
     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      {props.keys.map((eachKey: string) => {
+      {props.rowKeys.map((eachKey: KeyValueProps) => {
+        const keyValue = Object.keys(eachKey)[0];
+        const keyLabel = Object.values(eachKey)[0];
+        console.log("keyva", keyValue, keyLabel);
+
         let properties = {
-          shape: eachKey === "0" ? "round" : "circle",
-          color: getColorForKey(eachKey),
-          label: eachKey,
-          span: 6
+          shape: keyValue === "0" ? "round" : "circle",
+          color:
+            type === KEY_PAD_TYPES.BASIC ? getColorForKey(keyValue) : "#595959",
+          label: keyLabel,
+          value: keyValue,
+          span: span,
+          onKeyPress: onKeyPress,
+          onEvaluateExpression: onEvaluateExpression
         };
 
-        if (eachKey === "0") {
+        if (keyValue === "0") {
+          console.log("serto", keyValue);
           properties.span = 12;
         }
         return <Column {...properties} />;
@@ -66,12 +100,39 @@ const RowComponent = (props: RowComponentPorps) => {
 };
 
 const KeyPad = (props: KeyPadProps) => {
+  const { onEvaluateExpression, onKeyPress } = props;
+  const onScientificKeyPres = () => {
+    // Do Nothing
+  };
   return (
-    <div>
-      {Object.values(jsonForKeyPad.basic).map((value: string[]) => {
-        return <RowComponent keys={value} />;
-      })}
-    </div>
+    <KeyPadWrapper>
+      <ScientificKeyWrapper>
+        {jsonForKeyPad.scientific.map((eachRow: any[]) => {
+          return (
+            <RowComponent
+              rowKeys={eachRow}
+              span={4}
+              type={KEY_PAD_TYPES.SCIENTIFIC}
+              onKeyPress={onScientificKeyPres}
+              onEvaluateExpression={onScientificKeyPres}
+            />
+          );
+        })}
+      </ScientificKeyWrapper>
+      <BasicKeyWrapper>
+        {jsonForKeyPad.basic.map((eachRow: any[]) => {
+          return (
+            <RowComponent
+              rowKeys={eachRow}
+              span={6}
+              type={KEY_PAD_TYPES.BASIC}
+              onKeyPress={onKeyPress}
+              onEvaluateExpression={onEvaluateExpression}
+            />
+          );
+        })}
+      </BasicKeyWrapper>
+    </KeyPadWrapper>
   );
 };
 
