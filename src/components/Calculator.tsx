@@ -8,6 +8,15 @@ const { CalculatorLayout, Title, Content, Wrapper } = Styles;
 
 interface CalculatorProps {}
 
+const evaluate = (expression: string) => {
+  try {
+    return math.evaluate(expression).toString();
+  } catch (e) {
+    console.log(e);
+    return "0";
+  }
+};
+
 const Calculator = (Props: CalculatorProps) => {
   const [inputExpression, setInputExpression] = useState<string>("0");
 
@@ -16,7 +25,7 @@ const Calculator = (Props: CalculatorProps) => {
       setInputExpression("0");
     } else {
       if (inputExpression === "0") {
-        setInputExpression(math.evaluate(inputExpression + key));
+        setInputExpression(evaluate(inputExpression + key));
       } else {
         setInputExpression(inputExpression + key);
       }
@@ -24,13 +33,12 @@ const Calculator = (Props: CalculatorProps) => {
   };
 
   const onEvaluateExpression = () => {
-    setInputExpression(math.evaluate(inputExpression));
+    setInputExpression(evaluate(inputExpression));
   };
 
   return (
     <CalculatorLayout>
       <Wrapper>
-        {/* <Title>Calculator</Title> */}
         <Content>
           <Display inputValue={inputExpression} />
           <KeyPad
