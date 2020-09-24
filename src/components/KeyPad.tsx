@@ -14,6 +14,7 @@ const {
 } = Styles;
 interface KeyPadProps {
   onKeyPress: (label: string) => void;
+  inputExpression?: string;
   onEvaluateExpression?: () => void;
 }
 interface RowComponentPorps extends KeyPadProps {
@@ -62,21 +63,22 @@ const Column = (props: ColumnProps) => {
 };
 
 const RowComponent = (props: RowComponentPorps) => {
-  const { type, span, onKeyPress, onEvaluateExpression } = props;
+  const { type, inputExpression } = props;
   return (
     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
       {props.rowKeys.map((eachKey: KeyValueProps) => {
         const keyValue = Object.keys(eachKey)[0];
         const keyLabel = Object.values(eachKey)[0];
+        const color =
+          type === KEY_PAD_TYPES.BASIC ? getColorForKey(keyValue) : "#595959";
+        const label =
+          keyValue === "ac" ? (inputExpression === "0" ? "AC" : "C") : keyLabel;
 
         let properties = {
-          color:
-            type === KEY_PAD_TYPES.BASIC ? getColorForKey(keyValue) : "#595959",
-          label: keyLabel,
+          color,
+          label,
           value: keyValue,
-          span: span,
-          onKeyPress: onKeyPress,
-          onEvaluateExpression: onEvaluateExpression
+          ...props
         };
 
         if (keyValue === "0") {
@@ -89,7 +91,8 @@ const RowComponent = (props: RowComponentPorps) => {
 };
 
 const KeyPad = (props: KeyPadProps) => {
-  const { onEvaluateExpression, onKeyPress } = props;
+  const { onEvaluateExpression, onKeyPress, inputExpression } = props;
+
   const onScientificKeyPres = () => {
     // Do Nothing
   };
@@ -112,6 +115,7 @@ const KeyPad = (props: KeyPadProps) => {
         {jsonForKeyPad.basic.map((eachRow: any[]) => {
           return (
             <RowComponent
+              inputExpression={inputExpression}
               rowKeys={eachRow}
               span={6}
               type={KEY_PAD_TYPES.BASIC}

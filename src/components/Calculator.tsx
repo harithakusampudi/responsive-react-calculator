@@ -22,7 +22,7 @@ const Calculator = (Props: CalculatorProps) => {
   const [inputExpression, setInputExpression] = useState<string>("0");
 
   const onKeyPress = (key: string) => {
-    if (key === "c") {
+    if (key === "ac") {
       setInputExpression("0");
     } else {
       if (inputExpression === "0") {
@@ -49,6 +49,7 @@ const Calculator = (Props: CalculatorProps) => {
         <Content>
           <Display inputValue={inputExpression} />
           <KeyPad
+            inputExpression={inputExpression}
             onKeyPress={onKeyPress}
             onEvaluateExpression={onEvaluateExpression}
           />

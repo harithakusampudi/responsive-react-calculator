@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 const Content = styled.div`
-  @media (max-width: 728px) {
+  @media (max-width: 600px) {
     width: 18rem;
   }
   width: 100%;
@@ -54,6 +54,8 @@ const Key = styled(Button)`
 const Label = styled.span`
   color: ${props => (props.color === "#8c8c8c" ? "#000" : "#fff")};
   font-size: 16px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu;
   margin-left: ${props => (props.key === "0" ? "0px" : "none")};
 `;
 export const ColWrapper = styled(Col)`
@@ -72,7 +74,8 @@ const DisplayWrapper = styled.div`
 const Input = styled.input`
   flex: 1;
   color: #f0f0f0;
-  font-family: San Francisco;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu;
   font-size: 40px;
   max-width: 100%;
   background-color: inherit !important;

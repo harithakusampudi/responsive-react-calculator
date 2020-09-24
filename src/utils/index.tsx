@@ -20,7 +20,7 @@ export const getColorForKey = (key: string) => {
   if (isNumber(key)) {
     return keyColors.black;
   } else {
-    const specialKeys = key === "c" || key === "±" || key === "%";
+    const specialKeys = key === "ac" || key === "±" || key === "%";
     return specialKeys ? keyColors.lightGrey : keyColors.orange;
   }
 };
