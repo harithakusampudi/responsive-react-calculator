@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
 import "./index.css";
-import App from "./App";
+import Calculator from "./components";
 import configureStore from "./configureStore";
 
 const { store, persistor } = configureStore();
@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <Calculator />
       </PersistGate>
     </Provider>
   </React.StrictMode>,
