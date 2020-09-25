@@ -11,4 +11,25 @@ Web-based calculator which supports basic calculations.
 
 Typescript with React.
 
-### Few screenS of the application
+### Few screenshots of the application
+
+#### History
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/hiddenHistory.PNG)
+
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/history.PNG)
+
+ #### Responsive
+
+Laptop view
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/laptopView.jpg)
+
+ Android view
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/androidView.PNG)
+
+Iphone view 
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/iphoneView.PNG)
+
+Tablet view
+![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/tabletView.PNG)
+
+
