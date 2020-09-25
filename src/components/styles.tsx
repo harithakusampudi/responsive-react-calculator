@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Col } from "antd";
+import { Button, Divider, Col } from "antd";
 
 const CalculatorLayout = styled.div`
   display: flex;
@@ -7,20 +7,27 @@ const CalculatorLayout = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 1rem;
 `;
 const Content = styled.div`
+  width: 100%;
+  height: 45rem;
+  overflow: scroll;
+`;
+
+const CalculatorWrapper = styled.div`
   @media (max-width: 600px) {
     width: 18rem;
   }
   width: 100%;
-  height: 100%;
+  margin-top: 1rem;
+  height: 30rem;
   display: grid;
   grid-template-rows: 15% 1fr;
   padding: 1rem;
@@ -97,6 +104,29 @@ const ScientificKeyWrapper = styled.div`
 `;
 const BasicKeyWrapper = styled.div``;
 
+const HistoryWrapper = styled.div`
+  padding: 1rem;
+`;
+
+const HistoryContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  height: 6rem;
+  @media (max-width: 600px) {
+    width: 10rem;
+  }
+  overflow: scroll;
+`;
+
+const TextContnet = styled.span`
+  font-weight: 400px;
+`;
+
+const HistoryButton = styled.div`
+  cursor: pointer;
+`;
+
 export default {
   CalculatorLayout,
   Content,
@@ -105,8 +135,14 @@ export default {
   Label,
   ColWrapper,
   DisplayWrapper,
+  HistoryWrapper,
   KeyPadWrapper,
   ScientificKeyWrapper,
   BasicKeyWrapper,
-  Input
+  HistoryContent,
+  Input,
+  CalculatorWrapper,
+  HistoryButton,
+  TextContnet,
+  Divider
 };

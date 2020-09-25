@@ -1,1 +1,3 @@
-export const types = {};
+export const types = {
+  SAVE: "@SAVE/CALCULATION"
+};

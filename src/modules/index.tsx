@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import calculations from './calculations'
+import { combineReducers } from "redux";
+import calculations from "./calculations";
 
 const appReducer = combineReducers({
-    calculations
-})
+  calculations
+});
 
-export default appReducer
+export default appReducer;

@@ -4,10 +4,20 @@ import KeyPad from "./KeyPad";
 import Styles from "./styles";
 import * as math from "mathjs";
 import { isOperator } from "../utils";
+import History from "./History";
+import moment from "moment";
+import { CalculationProps } from "../modules/calculations/calculations.duck";
+const { CalculatorLayout, Content, Wrapper, CalculatorWrapper } = Styles;
 
-const { CalculatorLayout, Content, Wrapper } = Styles;
-
-interface CalculatorProps {}
+interface CalculatorProps {
+  calculations: {
+    todayList: CalculationProps[];
+    yesterdayList: CalculationProps[];
+  };
+  actions: {
+    saveCalculation: (payload: CalculationProps) => void;
+  };
+}
 
 const evaluate = (expression: string) => {
   try {
@@ -18,7 +28,7 @@ const evaluate = (expression: string) => {
   }
 };
 
-const Calculator = (Props: CalculatorProps) => {
+const Calculator = (props: CalculatorProps) => {
   const [inputExpression, setInputExpression] = useState<string>("0");
 
   const onKeyPress = (key: string) => {
@@ -40,19 +50,31 @@ const Calculator = (Props: CalculatorProps) => {
   };
 
   const onEvaluateExpression = () => {
-    setInputExpression(evaluate(inputExpression));
+    const evaluatedExpression = evaluate(inputExpression);
+    if (evaluatedExpression !== "0") {
+      let payload = {
+        date: moment(),
+        result: evaluatedExpression,
+        input: inputExpression
+      };
+      props.actions.saveCalculation(payload);
+    }
+    setInputExpression(evaluatedExpression);
   };
 
   return (
     <CalculatorLayout>
       <Wrapper>
         <Content>
-          <Display inputValue={inputExpression} />
-          <KeyPad
-            inputExpression={inputExpression}
-            onKeyPress={onKeyPress}
-            onEvaluateExpression={onEvaluateExpression}
-          />
+          <CalculatorWrapper>
+            <Display inputValue={inputExpression} />
+            <KeyPad
+              inputExpression={inputExpression}
+              onKeyPress={onKeyPress}
+              onEvaluateExpression={onEvaluateExpression}
+            />
+          </CalculatorWrapper>
+          <History calculations={props.calculations} />
         </Content>
       </Wrapper>
     </CalculatorLayout>
