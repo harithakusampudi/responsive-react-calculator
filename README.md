@@ -13,23 +13,22 @@ Typescript with React.
 
 ### Few screenshots of the application
 
-#### History
+
+#### Calculations and History
+
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/hiddenHistory.PNG)
 
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/history.PNG)
 
- #### Responsive
 
-Laptop view
+#### Responsive
+
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/laptopView.jpg)
 
- Android view
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/androidView.PNG)
 
-Iphone view 
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/iphoneView.PNG)
 
-Tablet view
 ![image](https://github.com/harithakusampudi/responsive-react-calculator/blob/master/screenshots/tabletView.PNG)
 
 
